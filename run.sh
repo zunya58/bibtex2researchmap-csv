@@ -7,9 +7,9 @@ fi
 
 work=`pwd`
 
-cp -p $BIBTEX /$SRC/
+cp -p $BIBTEX /
 
-cd /$SRC
+cd /
 ruby $EXE $BIBTEX
 
 for i in paper_e.csv paper_j.csv misc_e.csv misc_j.csv
