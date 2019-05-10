@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+gem "bibtex-ruby"
+gem "citeproc-ruby"
+gem "csl"
+gem "csl-styles"
