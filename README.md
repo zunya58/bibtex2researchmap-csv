@@ -1,5 +1,8 @@
 # bibtex2researchmap-csv
 
+このリポジトリは，私自身の用途にあったカスタマイズを施すため，[nbhr](https://github.com/nbhr) さんの [リポジトリ](https://github.com/nbhr/bibtex2researchmap-csv)からforkされました．
+オリジナルのコード作者nbhrさんに感謝します．
+
 ## 目的
 
 [researchmap.jp](https://researchmap.jp/)への論文情報登録を省力化するためのrubyスクリプトです．
@@ -21,18 +24,35 @@ gemで以下をインストール．要するに[jekyll](https://jekyllrb.com/)�
 * [citeproc-ruby](https://github.com/inukshuk/citeproc-ruby)
 * [csl-ruby](https://github.com/inukshuk/csl-ruby)
 
-## 使い方
+## 使い方（Dockerコンテナ内で実行する場合）
+
+Dockerイメージをビルドする．
+```
+$ make build
+```
+
+bibファイルを所定の場所に所定の名前で置く
+```
+$ mkdir work
+$ mv /path/to/hoge.bib work/my-work.bib
+```
+
+Dockerイメージを実行する
+```
+$ make run
+```
+
+workディレクトリ内に下記のファイルが出力されるので，これらをresearchmap.jpでimportする．文字コードはUTF-8なので，必要ならnkfか何かで変換する．
+* `paper.csv` : 「論文」用
+* `presentation.csv` : 「講演・口頭発表等」用
+* `misc.csv` : 「Misc」用
+
+## 使い方（スクリプトを直接実行する場合）
 
 第1引数に元となるbibファイルを指定して実行．
 ```
 $ ruby bib2csv.rb sample.bib
 ```
-
-下記のファイルが出力されるので，これらをresearchmap.jpでimportする．文字コードはUTF-8なので，必要ならnkfか何かで変換する．
-* `paper_e.csv` : 「論文-英語」用
-* `paper_j.csv` : 「論文-日本語」用
-* `misc_e.csv` : 「Misc-英語」用
-* `misc_j.csv` : 「Misc-日本語」用
 
 ### 注意
 
@@ -84,13 +104,24 @@ $ ruby bib2csv.rb sample.bib
 
 ### BibTexエントリーとresearchmap.jp分類の対応関係
 
-* `@article` → 「論文」，査読あり
-* `@inproceedings` → 「Misc」，査読あり（国際会議論文を想定）
-* `@techreport` → 「Misc」，査読なし（信学会や情処の研究会を想定）
+* 論文（学内評価および公開用）
+
+  * `@article`: 論文（査読あり，学術雑誌）
+  * `@phdthesis`: 論文（学位論文（博士））
+  * `@inproceedings`かつ査読あり（主に国際会議を想定．まれに査読あり国内学会もあり）
+
+* 講演・口頭発表等（学内評価用）
+
+  * `@inproceedings`
+
+* Misc（公開用）
+
+  * `@inproceedings`かつ査読なし（国内研究会などを想定）
 
 ### 日英の判定
 
 * 著者と誌名いずれかに日本語（`/(?:\p{Hiragana}|\p{Katakana}|[一-龠々])/`）を含むか否か
+* 英語の場合，日本語のタイトル・著者・誌名属性には，英語のものが入る
 
 ### BibTex拡張フィールド
 

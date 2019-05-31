@@ -1,7 +1,6 @@
 FROM ruby:2.6.3-slim
 
 ENV EXE=bib2csv.rb
-ENV BIBTEX=my-work.bib
 
 ADD Gemfile .
 RUN bundle install

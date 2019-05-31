@@ -12,7 +12,7 @@ cp -p $BIBTEX /
 cd /
 ruby $EXE $BIBTEX
 
-for i in paper_e.csv paper_j.csv misc_e.csv misc_j.csv
+for i in paper.csv presentation.csv misc.csv
 do
 	cp $i $work/
 done

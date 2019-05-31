@@ -144,7 +144,6 @@
           <if variable="container-title">
             <group delimiter=", ">
               <group delimiter=" ">
-                <text term="in"/>
                 <text variable="container-title" font-style="italic"/>
               </group>
               <text variable="event-place"/>
