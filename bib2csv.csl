@@ -146,7 +146,7 @@
               <group delimiter=" ">
                 <text variable="container-title" font-style="italic"/>
               </group>
-              <text variable="event-place"/>
+              <!-- <text variable="event-place"/> -->
             </group>
           </if>
           <!-- Unpublished Conference Paper -->
@@ -156,7 +156,7 @@
                 <text term="presented at"/>
                 <text variable="event"/>
               </group>
-              <text variable="event-place"/>
+              <!-- <text variable="event-place"/> -->
             </group>
           </else>
         </choose>

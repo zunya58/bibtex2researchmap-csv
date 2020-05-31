@@ -1,5 +1,6 @@
 #!/bin/bash
 
+BIBTEX=my-work.bib
 if [ ! -f $BIBTEX ]; then
 	echo "$BIBTEX missed" 1>&2
 	exit 1
