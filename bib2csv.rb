@@ -81,16 +81,19 @@ class BibTeX::Entry
 	attr_accessor :x_address
 
 	def to_paper()
-		return sprintf('insert,force,null,null,%s,"%s","%s","[%s]","[%s]",null,null,null,null,null,%s,"%s","%s",%s,%s,%s,%s,%s,%s,%s,%s,null,null,%s,null,null,null,null,false,disclosed',
+		is_display = self.x_reviewed == 'true'? 'disclosed' : 'closed'
+		return sprintf('insert,force,null,null,%s,"%s","%s","[%s]","[%s]",null,null,null,null,null,%s,"%s","%s",%s,%s,%s,%s,%s,%s,%s,%s,null,null,%s,null,null,null,null,false,"%s"',
 			MEMBER_ID, self.x_title, self.x_title, self.x_authors, self.x_authors, self.date,self.x_locators,
 			self.x_locators, self['volume'], self['number'],self.x_page_start, self.x_page_end, self.x_lang, self.x_reviewed,
-			self.x_invited, self.x_paper_type, self.x_doi)
+			self.x_invited, self.x_paper_type, self.x_doi, is_display)
 	end
 
 	def to_presentation()
-		return sprintf('insert,force,null,null,%s,"%s","%s","[%s]","[%s]","%s","%s",%s,null,null,%s,%s,%s,null,null,"%s","%s",null,null,null,%s,null,null,null,false,disclosed',
+		is_display = self.x_reviewed == 'true'? 'closed' : 'disclosed'
+		return sprintf('insert,force,null,null,%s,"%s","%s","[%s]","[%s]","%s","%s",%s,null,null,%s,%s,%s,null,null,"%s","%s",null,null,null,%s,null,null,null,false,"%s"',
 			MEMBER_ID, self.x_title, self.x_title, self.x_authors, self.x_authors, self.x_locators, self.x_locators,
-			self.date, self.x_invited, self.x_lang, self.x_presentation_type, self.x_address, self.x_address, self.x_category)
+			self.date, self.x_invited, self.x_lang, self.x_presentation_type, self.x_address, self.x_address, self.x_category,
+			is_display)
 	end
 
 	def to_misc()
@@ -234,7 +237,7 @@ end
 
 begin
 	if ARGV.length != 1
-		puts "\nUsage: %s input.bib\n\n\tInput: input.bib\n\tOutput: paper.csv, presentation.csv\n\n" % [ $0 ]
+		puts "\nUsage: %s input.bib\n\n\tInput: input.bib\n\tOutput: paper.csv, presentation.csv, misc.csv\n\n" % [ $0 ]
 		exit
 	end
 

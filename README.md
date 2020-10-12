@@ -141,7 +141,7 @@ MISC
 
 ### BibTexエントリーとresearchmap.jp分類の対応関係
 
-* 論文（公開）
+* 論文（査読ありは公開．査読なしは非公開）
 
   * `@article`: 論文（査読あり，学術雑誌）
   * `@inproceedings`
@@ -150,7 +150,7 @@ MISC
   * `@phdthesis`: 論文（学位論文（博士））
   * `@masterthesis`: 論文（学位論文（修士）
 
-* 講演・口頭発表等（公開）
+* 講演・口頭発表等（査読ありは非公開．査読なしは公開）
 
   * `@inproceedings`
 
